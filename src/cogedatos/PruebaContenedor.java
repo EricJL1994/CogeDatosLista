@@ -18,7 +18,7 @@ public class PruebaContenedor {
         DecimalFormat dform = new DecimalFormat("#.###");
 
         try {
-            fichesc = new FileWriter("salida1.txt");
+            fichesc = new FileWriter("ListaEncadenada.txt");
             RandomAccessFile fichero = new RandomAccessFile("datos.dat", "r");
 
             // Rellenamos el vector con los datos de datos.dat.
@@ -30,11 +30,11 @@ public class PruebaContenedor {
 
             //PARTE INSERCION
             // Escribimos en el fichero los tiempos de inserción
-            fichesc.write("·->Insertar en el contenedor 10000 elementos\r\n");
-            System.out.println("Insertar en el contenedor 10000 elementos");
-            for (int j = 0; j < 10; j++) {
+            fichesc.write("·->Insertar en el contenedor 100000 elementos\r\n");
+            System.out.println("Insertar en el contenedor 100000 elementos");
+            for (int j = 0; j < 50; j++) {
                 timeS = System.currentTimeMillis();
-                for (int i = 0; i < 10000; i++) {
+                for (int i = 0; i < 100000; i++) {
                     a.insertar(vec[i]);
                 }
                 timeF = System.currentTimeMillis();
@@ -45,13 +45,13 @@ public class PruebaContenedor {
 
             //PARTE EXTRACCION
             // Escribimos en el fichero los tiempos de extracción
-            fichesc.write("\r\n\r\n·->Extraer en el contenedor 10000 elementos\r\n");
-            System.out.println("Extraer en el contenedor 10000 elementos");
-            for (int i = 0; i < 100000; i++) {
-                a.insertar(vec[i]);
-
-            }
-            for (int j = 0; j < 10; j++) {
+            fichesc.write("\r\n\r\n·->Extraer en el contenedor 100000 elementos\r\n");
+            System.out.println("Extraer en el contenedor 100000 elementos");
+            
+            for (int j = 0; j < 50; j++) {
+                for (int i = 0; i < 100000; i++) {
+                    a.insertar(vec[i]);
+                }
                 timeS = System.currentTimeMillis();
                 for (int i = 0; i < 100000; i++) {
                     a.extraer(vec[i]);

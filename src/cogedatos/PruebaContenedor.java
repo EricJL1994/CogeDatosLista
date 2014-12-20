@@ -14,6 +14,7 @@ public class PruebaContenedor {
         double timeS;
         double timeF;
         FileWriter fichesc;
+        double[] extraccion = new double[50];
         // Formato de tres decimales.
         DecimalFormat dform = new DecimalFormat("#.###");
 
@@ -38,27 +39,27 @@ public class PruebaContenedor {
                     a.insertar(vec[i]);
                 }
                 timeF = System.currentTimeMillis();
+                
                 fichesc.write("Tiempo de inserción " + j + ": " + dform.format(timeF - timeS) + " ms\r\n");
                 System.out.println("Tiempo de inserción " + j + ": " + dform.format(timeF - timeS) + " ms");
-                a.vaciar();
+
+                //EXTRACCION
+                timeS = System.currentTimeMillis();
+                for (int i = 0; i < 100000; i++) {
+                    a.extraer(vec[i]);
+                }
+                timeF = System.currentTimeMillis();
+                extraccion[j] = timeF - timeS;
+
             }
 
             //PARTE EXTRACCION
             // Escribimos en el fichero los tiempos de extracción
             fichesc.write("\r\n\r\n·->Extraer en el contenedor 100000 elementos\r\n");
             System.out.println("Extraer en el contenedor 100000 elementos");
-            
             for (int j = 0; j < 50; j++) {
-                for (int i = 0; i < 100000; i++) {
-                    a.insertar(vec[i]);
-                }
-                timeS = System.currentTimeMillis();
-                for (int i = 0; i < 100000; i++) {
-                    a.extraer(vec[i]);
-                }
-                timeF = System.currentTimeMillis();
-                fichesc.write("Tiempo de extracción " + j + ": " + dform.format(timeF - timeS) + " ms\r\n");
-                System.out.println("Tiempo de extracción " + j + ": " + dform.format(timeF - timeS) + " ms");
+                fichesc.write("Tiempo de extracción " + j + ": " + dform.format(extraccion[j]) + " ms\r\n");
+                System.out.println("Tiempo de extracción " + j + ": " + dform.format(extraccion[j]) + " ms");
             }
 
             fichesc.close();
